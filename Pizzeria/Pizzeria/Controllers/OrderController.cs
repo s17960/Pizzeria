@@ -40,8 +40,12 @@ namespace Pizzeria.Controllers
 
         // POST: api/Order
         [HttpPost]
-        public void Post([FromBody] string value)
+        public IActionResult Create(Order newOrder)
         {
+            _context.Order.Add(newOrder);
+            _context.SaveChanges();
+
+            return StatusCode(201, newOrder);
         }
 
         // PUT: api/Order/5

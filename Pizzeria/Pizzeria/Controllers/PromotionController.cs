@@ -41,8 +41,12 @@ namespace Pizzeria.Controllers
 
         // POST: api/Promotion
         [HttpPost]
-        public void Post([FromBody] string value)
+        public IActionResult Create(Promotion newPromotion)
         {
+            _context.Promotion.Add(newPromotion);
+            _context.SaveChanges();
+
+            return StatusCode(201, newPromotion);
         }
 
         // PUT: api/Promotion/5

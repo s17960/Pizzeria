@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Pizzeria.Models;
 
 namespace Pizzeria.Controllers
@@ -22,9 +23,13 @@ namespace Pizzeria.Controllers
 
         // GET: api/Pizza
         [HttpGet]
-        public IActionResult GetPizzas()
+        public IActionResult GetPizzas(string order = "name")
         {
-            return Ok(_context.Pizza.ToList());
+            if (order == "price"){
+                return Ok(_context.Pizza.OrderByDescending(x => x.Price).ToList());
+            }
+
+            return Ok(_context.Pizza.OrderBy(x => x.Name).ToList());
         }
 
         // GET: api/Pizza/5
@@ -41,20 +46,43 @@ namespace Pizzeria.Controllers
 
         // POST: api/Pizza
         [HttpPost]
-        public void Post([FromBody] string value)
+        public IActionResult Create(Pizza newPizza)
         {
+            _context.Pizza.Add(newPizza);
+            _context.SaveChanges();
+
+            return StatusCode(201, newPizza);
         }
 
-        // PUT: api/Pizza/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        // PUT: api/Pizza
+        [HttpPut("{pizzaId:int}")]
+        public IActionResult Update(int pizzaId, Pizza updatedPizza)
         {
+            if (_context.Pizza.Count(x => x.PizzaId == pizzaId) == 0)
+            {
+                return NotFound();
+            }
+
+            _context.Pizza.Attach(updatedPizza);
+            _context.Entry(updatedPizza).State = EntityState.Modified;
+            _context.SaveChanges();
+
+            return Ok(updatedPizza);
         }
 
         // DELETE: api/ApiWithActions/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        [HttpDelete("{pizzaId:int}")]
+        public IActionResult Delete(int pizzaId)
         {
+            var pizza = _context.Pizza.FirstOrDefault(x => x.PizzaId == pizzaId);
+            if (pizza == null)
+            {
+                return NotFound();
+            }
+
+            _context.Pizza.Remove(pizza);
+            _context.SaveChanges();
+            return Ok(pizza);
         }
     }
 }

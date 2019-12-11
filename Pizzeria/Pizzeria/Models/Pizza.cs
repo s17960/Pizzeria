@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Pizzeria.Models
 {
@@ -13,10 +14,16 @@ namespace Pizzeria.Models
         }
 
         public int PizzaId { get; set; }
+
+        [Required(ErrorMessage = "Nazwa jest wymagana!")]
         public string Name { get; set; }
+        [Required(ErrorMessage = "Cena jest wymagana!")]
         public decimal Price { get; set; }
+        [Required(ErrorMessage = "Grubość ciasta jest wymagana!")]
         public int DoughId { get; set; }
+        [Required(ErrorMessage = "Rozmiar jest wymagany!")]
         public int DiameterId { get; set; }
+        [Required(ErrorMessage = "Informacja, czy pizza jest w Menu jest wymagana!")]
         public bool InMenu { get; set; }
 
         public virtual Diameter Diameter { get; set; }
