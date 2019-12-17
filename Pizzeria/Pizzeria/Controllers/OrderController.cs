@@ -13,7 +13,7 @@ namespace Pizzeria.Controllers
     public class OrderController : ControllerBase
     {
 
-        s17960Context _context;
+        private readonly s17960Context _context;
 
         public OrderController(s17960Context context)
         {

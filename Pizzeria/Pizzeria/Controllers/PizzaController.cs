@@ -14,7 +14,7 @@ namespace Pizzeria.Controllers
     public class PizzaController : ControllerBase
     {
 
-        private s17960Context _context;
+        private readonly s17960Context _context;
 
         public PizzaController(s17960Context context)
         {
