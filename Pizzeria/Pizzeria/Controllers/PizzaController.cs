@@ -20,7 +20,11 @@ namespace Pizzeria.Controllers
         {
             _context = context;
         }
-
+        /// <summary>
+        /// Metoda zwraca liste pizz
+        /// </summary>
+        /// <param name="order"></param>
+        /// <returns>Lista pizz</returns>
         // GET: api/Pizza
         [HttpGet]
         public IActionResult GetPizzas(string order = "name")

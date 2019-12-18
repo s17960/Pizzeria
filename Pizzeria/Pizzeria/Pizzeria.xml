@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Pizzeria</name>
+    </assembly>
+    <members>
+        <member name="M:Pizzeria.Controllers.PizzaController.GetPizzas(System.String)">
+            <summary>
+            Metoda zwraca liste pizz
+            </summary>
+            <param name="order"></param>
+            <returns>Lista pizz</returns>
+        </member>
+    </members>
+</doc>
