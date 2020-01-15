@@ -4,12 +4,52 @@
         <name>Pizzeria</name>
     </assembly>
     <members>
+        <member name="T:Pizzeria.Controllers.PizzaController">
+            <summary>
+            Kontroler pizzy
+            </summary>
+        </member>
+        <member name="M:Pizzeria.Controllers.PizzaController.#ctor(Pizzeria.Models.s17960Context)">
+            <summary>
+            Konstruktor, pobiera context bazy danych
+            </summary>
+            <param name="context"></param>
+        </member>
         <member name="M:Pizzeria.Controllers.PizzaController.GetPizzas(System.String)">
             <summary>
             Metoda zwraca liste pizz
             </summary>
             <param name="order"></param>
             <returns>Lista pizz</returns>
+        </member>
+        <member name="M:Pizzeria.Controllers.PizzaController.GetPizza(System.Int32)">
+            <summary>
+            Metoda zwraca pizzę o podanym id
+            </summary>
+            <param name="pizzaId"></param>
+            <returns>Pizza o podanym id</returns>
+        </member>
+        <member name="M:Pizzeria.Controllers.PizzaController.Create(Pizzeria.Models.Pizza)">
+            <summary>
+            Metoda dodaje do bazy pizzę podaną w parametrze
+            </summary>
+            <param name="newPizza"></param>
+            <returns>Stworzona pizza</returns>
+        </member>
+        <member name="M:Pizzeria.Controllers.PizzaController.Update(System.Int32,Pizzeria.Models.Pizza)">
+            <summary>
+            Aktualizuje dane pizzy o podanym id
+            </summary>
+            <param name="pizzaId"></param>
+            <param name="updatedPizza"></param>
+            <returns>Zaktualizowana pizza</returns>
+        </member>
+        <member name="M:Pizzeria.Controllers.PizzaController.Delete(System.Int32)">
+            <summary>
+            Usuwa pizzę o podanym id
+            </summary>
+            <param name="pizzaId"></param>
+            <returns>Usunięta pizza</returns>
         </member>
     </members>
 </doc>

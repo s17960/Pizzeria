@@ -9,6 +9,9 @@ using Pizzeria.Models;
 
 namespace Pizzeria.Controllers
 {
+    /// <summary>
+    /// Kontroler pizzy
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     public class PizzaController : ControllerBase
@@ -16,10 +19,15 @@ namespace Pizzeria.Controllers
 
         private readonly s17960Context _context;
 
+        /// <summary>
+        /// Konstruktor, pobiera context bazy danych
+        /// </summary>
+        /// <param name="context"></param>
         public PizzaController(s17960Context context)
         {
             _context = context;
         }
+
         /// <summary>
         /// Metoda zwraca liste pizz
         /// </summary>
@@ -36,11 +44,16 @@ namespace Pizzeria.Controllers
             return Ok(_context.Pizza.OrderBy(x => x.Name).ToList());
         }
 
+        /// <summary>
+        /// Metoda zwraca pizzę o podanym id
+        /// </summary>
+        /// <param name="pizzaId"></param>
+        /// <returns>Pizza o podanym id</returns>
         // GET: api/Pizza/5
-        [HttpGet("{id}")]
-        public IActionResult GetPizza(int id)
+        [HttpGet("{pizzaId:int}")]
+        public IActionResult GetPizza(int pizzaId)
         {
-            var pizza = _context.Pizza.FirstOrDefault(e => e.PizzaId == id);
+            var pizza = _context.Pizza.FirstOrDefault(e => e.PizzaId == pizzaId);
             if (pizza == null)
             {
                 return NotFound();
@@ -48,6 +61,11 @@ namespace Pizzeria.Controllers
             return Ok(pizza);
         }
 
+        /// <summary>
+        /// Metoda dodaje do bazy pizzę podaną w parametrze
+        /// </summary>
+        /// <param name="newPizza"></param>
+        /// <returns>Stworzona pizza</returns>
         // POST: api/Pizza
         [HttpPost]
         public IActionResult Create(Pizza newPizza)
@@ -58,6 +76,12 @@ namespace Pizzeria.Controllers
             return StatusCode(201, newPizza);
         }
 
+        /// <summary>
+        /// Aktualizuje dane pizzy o podanym id
+        /// </summary>
+        /// <param name="pizzaId"></param>
+        /// <param name="updatedPizza"></param>
+        /// <returns>Zaktualizowana pizza</returns>
         // PUT: api/Pizza
         [HttpPut("{pizzaId:int}")]
         public IActionResult Update(int pizzaId, Pizza updatedPizza)
@@ -73,7 +97,12 @@ namespace Pizzeria.Controllers
 
             return Ok(updatedPizza);
         }
-
+        
+        /// <summary>
+        /// Usuwa pizzę o podanym id
+        /// </summary>
+        /// <param name="pizzaId"></param>
+        /// <returns>Usunięta pizza</returns>
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{pizzaId:int}")]
         public IActionResult Delete(int pizzaId)
